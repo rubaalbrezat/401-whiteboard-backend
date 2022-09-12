@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+    env:
+      DATABASE_URL :  postgres://zdhwpkbaryaxeh:6beb827f0d8b7f14edea6b62d68f3d71d79eff569d74e70d8e5c93a781a276bf@ec2-52-4-87-74.compute-1.amazonaws.com:5432/d66ljshv524mj
+
+
 jobs:
   build:
 
