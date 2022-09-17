@@ -1,5 +1,7 @@
 'use strict'
 
+ 
+
 
 //CRUD Operations
 class userComment {
@@ -11,43 +13,62 @@ class userComment {
 
 	async creat(obj) {
 		try {
-			return await this.model.creat(obj);
+			// let newComment = await this.model.create(obj);
+			// return newComment;
+			return await this.model.create(obj);
 		} catch (e) {
-			console.error('error in creation ', this.model.name);
-
+			console.error('error in create operation for model:', this.model.name);
 		}
+
 	}
 
-	async readComment(id){
-		try{
-			if(id){
-				return await this.model.findOne({where: {id:id}})
-			}else{
+
+	async read(id) {
+		try {
+			if (id) {
+				return await this.model.fidOne({ where: { id: id } })
+			} else {
 				return await this.model.findAll();
-	
 			}
-		} catch(e){
-			console.error(' error in reading ',this.model.name);
+		} catch (e) {
+			console.error('error in read operation for model:', this.model.name);
+			console.log(error);
+
+		}
+
+	}
+
+	async update(obj, id) {
+		try {
+			return this.model.update(obj, { where: { id } });
+		} catch (e) {
+			console.error('error in update operation for model:', this.model.name);
 
 		}
 	}
-       
 
-	async updateComment(obj,id) {
-        try {
-            return await this.model.update(obj, { where: { id } });
-        } catch (e) {
-            console.error(`error in updating `, this.model.name);
-        }
-    }
+	async delete(id) {
+		try {
+			return await this.model.destroy({ where: { id: id } });
 
-    async deleteComment(id) {
-        try {
-            return await this.model.destroy({ where: { id } });
-        } catch (e) {
-            console.error(`error in deleting`, this.model.name);
-        }
-    }
+		} catch (e) {
+			console.error('error in delete operation for model:', this.model.name);
 
+		}
+	}
+    
+	  async readCommentWithPost(CommentPost) {
+		console.log(CommentPost);
+		try {
+			return await this.model.findAll({ include: [CommentPost] })
+		} catch (e) {
+			console.error('error in reading comment for model:', this.model.name);
+			console.log(e);
+	
+		}
 
-}module.exports = userComment;
+	}
+
+	
+
+} module.exports = userComment;
