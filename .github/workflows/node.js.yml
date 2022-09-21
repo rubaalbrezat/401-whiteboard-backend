@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
     env:
-      DATABASE_URL :  postgres://zdhwpkbaryaxeh:6beb827f0d8b7f14edea6b62d68f3d71d79eff569d74e70d8e5c93a781a276bf@ec2-52-4-87-74.compute-1.amazonaws.com:5432/d66ljshv524mj
+      DATABASE_URL :  postgres://wehkytlzrhkjgw:e5d33f0f2f3e5078e4c88de2465e9bd46265cb209d40557422eb37530fc297fc@ec2-3-224-8-189.compute-1.amazonaws.com:5432/df8elt964okg50
 
 
 jobs:

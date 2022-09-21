@@ -19,7 +19,7 @@ let sequelizeOptions = {
 	}
 };
 
-let sequelize = new Sequelize(POSTGRES_URL);
+let sequelize = new Sequelize(POSTGRES_URL,sequelizeOptions);
 
 const postsModel = post(sequelize, DataTypes);
 const commentModel = comment(sequelize, DataTypes);
