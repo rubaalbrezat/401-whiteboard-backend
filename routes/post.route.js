@@ -1,22 +1,24 @@
 'use strict';
 
-const express = require( 'express' );
-const { posts } = require('../models');
+const express = require('express');
+const { posts, post } = require('../models');
 const router = express.Router();
+const { CommentPost } = require('../models/index');
 
 
 
 // Routes
-router.get( '/post', getAllPost );
+router.get('/post', getAllPost);
 // router.get( '/post/:id', getOnePost );
-router.post( '/post', addPost );
-router.put( '/post/:id', updatePost );
-router.delete( '/post/:id', deletePost );
+router.post('/post', addPost);
+router.put('/post/:id', updatePost);
+router.delete('/post/:id', deletePost);
+router.get('/CommentPost', getCommentPost);
 
 // Get all || one posts method
-async function getAllPost (req, res){
-    let post = await posts.read();
-    res.status(200).send(post)
+async function getAllPost(req, res) {
+	let post = await posts.read();
+	res.status(200).send(post)
 }
 
 // // Get one post method
@@ -31,25 +33,30 @@ async function getAllPost (req, res){
 
 // Create post method
 async function addPost(req, res) {
-    let newData = req.body;
-    let newPost = await posts.creat(newData);
-    res.status(200).json(newPost);
+	let newData = req.body;
+	let newPost = await posts.creat(newData);
+	res.status(200).json(newPost);
 }
 
 // Update post method
 async function updatePost(req, res) {
-    const id = req.params.id;
-    const newData = req.body;
-    const thePost = await posts.update(newData,id);  
-    // const updatedPost = await thePost.update(newData);  
-    res.status(201).json(thePost);
+	const id = req.params.id;
+	const newData = req.body;
+	const thePost = await posts.update(newData, id);
+	// const updatedPost = await thePost.update(newData);  
+	res.status(201).json(thePost);
 }
-  
+
 // Delete post method
 async function deletePost(req, res) {
-    const id = req.params.id;
-    let deletedPost = await posts.delete(id)
-    res.status(204).json({deletedPost});
+	const id = req.params.id;
+	let deletedPost = await posts.delete(id)
+	res.status(204).json({ deletedPost });
+}
+
+async function getCommentPost(req, res) {
+	let commentsPost = await post.findAll({ include: [CommentPost] })
+	res.status(200).json(commentsPost);
 }
 
 module.exports = router;
