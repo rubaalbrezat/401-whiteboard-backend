@@ -1,6 +1,6 @@
 'use strict'
 
- 
+
 
 
 //CRUD Operations
@@ -56,19 +56,9 @@ class userComment {
 
 		}
 	}
-    
-	  async readCommentWithPost(CommentPost) {
-		console.log(CommentPost);
-		try {
-			return await this.model.findAll({ include: [CommentPost] })
-		} catch (e) {
-			console.error('error in reading comment for model:', this.model.name);
-			console.log(e);
-	
-		}
 
-	}
 
-	
+
+
 
 } module.exports = userComment;
