@@ -19,7 +19,7 @@ let sequelizeOptions = {
   },
 };
 
-let sequelize = new Sequelize(POSTGRES_URL,sequelizeOptions);
+let sequelize = new Sequelize(POSTGRES_URL);
 
 sequelize
   .authenticate()
