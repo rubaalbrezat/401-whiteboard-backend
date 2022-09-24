@@ -1,5 +1,4 @@
-'use strict'
-
+'use strict';
 
 const bcrypt = require('bcrypt');
 const base64 = require('base-64');
@@ -34,6 +33,13 @@ async function getAllUsers(req, res) {
         console.log(e);
     }
 }
+
+
+
+
+
+
+
 
 
 
