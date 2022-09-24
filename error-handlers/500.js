@@ -1,10 +1,22 @@
-'use strict';
+'use strict'; 
 
-function errorHandler(err, req, res, next) {
-	res.send({
-		code: 500,
-		Message: `${err}`
-	})
+
+function errHandler(err,req,res,next) {
+
+    res.status(500).send({
+        code : 500,
+        Message : `${err}`
+    })
 }
 
-module.exports = { errorHandler };
+
+
+module.exports = {errHandler};
+// function errorHandler(err, req, res, next) {
+// 	res.send({
+// 		code: 500,
+// 		Message: `${err}`
+// 	})
+// }
+
+// module.exports = { errorHandler };
