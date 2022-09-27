@@ -3,13 +3,14 @@
 const express = require("express");
 const { posts, postsModel, commentModel } = require("../models");
 const { bearerAuth } = require("../middlewares/bearerAuth");
+const { creatPost, getPosts, updatePosts, deletePosts } = require("../middlewares/ACL");
 const router = express.Router();
 
-router.post('/post', bearerAuth, addPost);
-router.get('/post', bearerAuth, getAllPosts);
+router.post('/post', bearerAuth, creatPost,addPost);
+router.get('/post', bearerAuth, getPosts,getAllPosts);
 router.get('/post/:id', bearerAuth, gitOnePost);
-router.put('/post/:id', bearerAuth, updatePost);
-router.delete('/post/:id', bearerAuth, deletePost);
+router.put('/post/:id', bearerAuth, updatePosts,updatePost);
+router.delete('/post/:id', bearerAuth, deletePosts,deletePost);
 
 async function addPost(req, res) {
   res.status(201).send(await posts.addOn(req.body));
@@ -28,7 +29,7 @@ async function updatePost(req, res) {
 }
 async function deletePost(req, res) {
   await posts.deleteFrom(req.params.id);
-  res.status(204).end();
+  res.status(204).send();
 }
 
 module.exports = router;

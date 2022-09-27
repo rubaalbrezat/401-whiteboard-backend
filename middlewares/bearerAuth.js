@@ -12,6 +12,7 @@ async function bearerAuth(req, res, next) {
     const user = await usersModel.findOne({where: { userName: parsedToken.username }});
     if (user) {
       req.user = user;
+	  
       next();
     } else {
       next("enter valid token");

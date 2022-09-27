@@ -1,7 +1,6 @@
 'user strict'
 
-
-'use strict';
+const { DataTypes } = require("sequelize");
 
 function createUsersTable(sequelize, dataTypes) {
     return (
@@ -10,6 +9,21 @@ function createUsersTable(sequelize, dataTypes) {
             email : {type:dataTypes.STRING,allowNull:false,unique:true,isEmail:true},
             passWord : {type:dataTypes.STRING,allowNull:false},
             token : {type:dataTypes.VIRTUAL},
+			role :{
+				type : DataTypes.ENUM('admin','user'),
+				allowNull : false,
+				defaultValue :'user'
+			},
+			capabilities:{
+				type: DataTypes.VIRTUAL,
+				get:function(){
+					const acl={
+						admin :['read','create','delete','update'],
+						user:['read','create']
+					}
+					return acl[this.role]
+				}
+			}
         })
     );
 }
